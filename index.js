@@ -12,6 +12,7 @@ import AssignmentsRoutes from './Kambaz/Assignments/routes.js';
 
 import "dotenv/config";
 import session from "express-session";
+const PORT = process.env.PORT || 4000;
 const app = express();
 app.use(
   cors({
@@ -43,6 +44,6 @@ EnrollmentsRoutes(app, db);
 Lab5(app);
 Hello(app);
 
-app.listen(4000, () => {
+app.listen(PORT, () => {
   console.log("Server running on http://localhost:4000");
 });
