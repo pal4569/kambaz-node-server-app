@@ -24,21 +24,19 @@ const sessionOptions = {
   secret: process.env.SESSION_SECRET || "kambaz",
   resave: false,
   saveUninitialized: false,
+  proxy: true,
   cookie: {
     httpOnly: true,
     secure: true,
     sameSite: "none",
   }
-
 };
-if (process.env.SERVER_ENV !== "development") {
-  sessionOptions.proxy = true;
-  sessionOptions.cookie = {
-    sameSite: "none",
-    secure: true,
-    domain: process.env.SERVER_URL,
-  };
+
+if (process.env.SERVER_ENV === "development") {
+  sessionOptions.cookie.secure = false;
+  sessionOptions.cookie.sameSite = "lax";
 }
+
 app.use(session(sessionOptions));
 app.use(express.json());
 
