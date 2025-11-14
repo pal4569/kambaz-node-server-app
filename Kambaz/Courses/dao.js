@@ -28,6 +28,7 @@ export default function CoursesDao(db) {
   function updateCourse(courseId, courseUpdates) {
     const { courses } = db;
     const course = courses.find((course) => course._id === courseId);
+    console.log(course);
     Object.assign(course, courseUpdates);
     return course;
   }

@@ -20,7 +20,13 @@
   "author": "Michael Callahan",
   "license": "ISC",
   "dependencies": {
-    "express": "^5.1.0"
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "install": "^0.13.0",
+    "npm": "^11.6.2",
+    "uuid": "^13.0.0"
   },
   "start": "node index.js",
   "devDependencies": {
