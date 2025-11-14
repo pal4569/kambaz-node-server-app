@@ -17,7 +17,11 @@ const app = express();
 app.use(
   cors({
     credentials: true,
-    origin: process.env.CLIENT_URL || "http://localhost:3000",
+    origin: [
+      "https://kambaz-next-js-beige.vercel.app",
+      "https://kambaz-next-js-git-a5-michael-callahans-projects-d11017e3.vercel.app", // a5 branch
+      "http://localhost:3000",
+    ],
   })
 );
 const sessionOptions = {
