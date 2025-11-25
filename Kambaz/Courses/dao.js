@@ -1,9 +1,9 @@
 import { v4 as uuidv4 } from "uuid";
 import model from "./model.js";
 
-export default function CoursesDao(db) {
+export default function CoursesDao() {
   function findAllCourses() {
-  return model.find({}, { name: 1, description: 1 });
+    return model.find({});
   }
 
   function createCourse(course) {
@@ -12,8 +12,7 @@ export default function CoursesDao(db) {
   }
 
   async function findCoursesForEnrolledUser(userId) {
-  const { enrollments } = db;
-  const courses = await model.find({}, { name: 1, description: 1 });
+  const courses = await model.find({});
   const enrolledCourses = courses.filter((course) =>
     enrollments.some(
       (enrollment) =>
@@ -23,22 +22,18 @@ export default function CoursesDao(db) {
   return enrolledCourses;
   }
 
+  async function deleteCourse(courseId) {
+    return await model.deleteOne({ _id: courseId });
+  }
 
-  function deleteCourse(courseId) {
-    const { courses, enrollments } = db;
-    db.courses = courses.filter((course) => course._id !== courseId);
-    db.enrollments = enrollments.filter(
-      (enrollment) => enrollment.course !== courseId
+  async function updateCourse(courseId, courseUpdates) {
+    return await model.findByIdAndUpdate(
+      courseId,
+      { $set: courseUpdates },
+      { new: true }
     );
   }
 
-  function updateCourse(courseId, courseUpdates) {
-    const { courses } = db;
-    const course = courses.find((course) => course._id === courseId);
-    console.log(course);
-    Object.assign(course, courseUpdates);
-    return course;
-  }
   
 
   return {
