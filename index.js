@@ -62,6 +62,24 @@ EnrollmentsRoutes(app, db);
 Lab5(app);
 Hello(app);
 
+app.get("/dev/dbstatus", async (req, res) => {
+  try {
+    const db = mongoose.connection;
+    const collections = await db.db.listCollections().toArray();
+    const users = db.db.collection("users");
+    const count = await users.countDocuments();
+
+    res.json({
+      connected: db.readyState === 1,
+      dbName: db.name,
+      collections: collections.map((c) => c.name),
+      userCount: count,
+    });
+  } catch (e) {
+    res.json({ connected: false, error: e.message });
+  }
+});
+
 app.listen(PORT, () => {
   console.log("Server running on http://localhost:4000");
 });

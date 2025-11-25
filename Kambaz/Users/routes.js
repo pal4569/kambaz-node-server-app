@@ -81,21 +81,4 @@ export default function UserRoutes(app) {
   app.post("/api/users/signin", signin);
   app.post("/api/users/signout", signout);
   app.post("/api/users/profile", profile);
-  app.get("/dev/dbstatus", async (req, res) => {
-    try {
-      const db = mongoose.connection;
-      const collections = await db.db.listCollections().toArray();
-      const users = db.db.collection("users");
-      const count = await users.countDocuments();
-      res.json({
-        connected: db.readyState === 1,
-        dbName: db.name,
-        collections: collections.map((c) => c.name),
-        userCount: count,
-      });
-    } catch (e) {
-      res.json({ connected: false, error: e.message });
-    }
-  });
-
 }
