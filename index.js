@@ -30,6 +30,9 @@ app.use(
     ],
   })
 );
+
+app.set("trust proxy", 1);
+
 const sessionOptions = {
   secret: process.env.SESSION_SECRET || "kambaz",
   resave: false,
