@@ -19,18 +19,21 @@ const CONNECTION_STRING = process.env.DATABASE_CONNECTION_STRING || "mongodb://1
 mongoose.connect(CONNECTION_STRING);
 const app = express();
 
-app.use("/api", cors({
-  credentials: true,
-  origin: [
-    "https://kambaz-next-js-beige.vercel.app",
-    "https://kambaz-next-js-git-a5-michael-callahans-projects-d11017e3.vercel.app",
-    "https://kambaz-next-js-git-a6-michael-callahans-projects-d11017e3.vercel.app",
-    "http://localhost:3000",
-  ],
-}));
-
+app.use(
+  cors({
+    credentials: true,
+    origin: [
+      "https://kambaz-next-js-beige.vercel.app",
+      "https://kambaz-next-js-git-a5-michael-callahans-projects-d11017e3.vercel.app",
+      "https://kambaz-next-js-git-a6-michael-callahans-projects-d11017e3.vercel.app",
+      "http://localhost:3000",
+    ],
+  })
+);
 
 app.set("trust proxy", 1);
+
+app.use(express.json());
 
 const sessionOptions = {
   secret: process.env.SESSION_SECRET || "kambaz",
@@ -44,13 +47,12 @@ const sessionOptions = {
   }
 };
 
+app.use(session(sessionOptions));
+
 if (process.env.SERVER_ENV === "development") {
   sessionOptions.cookie.secure = false;
   sessionOptions.cookie.sameSite = "lax";
 }
-
-app.use(session(sessionOptions));
-app.use(express.json());
 
 UserRoutes(app, db);
 CourseRoutes(app, db);
