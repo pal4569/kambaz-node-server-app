@@ -25,6 +25,7 @@ app.use(
     origin: [
       "https://kambaz-next-js-beige.vercel.app",
       "https://kambaz-next-js-git-a5-michael-callahans-projects-d11017e3.vercel.app", // a5 branch
+      "https://kambaz-next-js-git-a6-michael-callahans-projects-d11017e3.vercel.app", // a6 branch
       "http://localhost:3000",
     ],
   })
