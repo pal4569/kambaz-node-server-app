@@ -28,6 +28,7 @@ app.use(
       "https://kambaz-next-js-beige.vercel.app",
       "https://kambaz-next-js-git-a5-michael-callahans-projects-d11017e3.vercel.app",
       "https://kambaz-next-js-git-a6-michael-callahans-projects-d11017e3.vercel.app",
+      "https://kambaz-next-js-git-quizzes-michael-callahans-projects-d11017e3.vercel.app",
       "http://localhost:3000",
     ],
   })
