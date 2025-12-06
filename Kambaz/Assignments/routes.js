@@ -1,6 +1,6 @@
 import AssignmentsDao from "../Assignments/dao.js";
 export default function AssignmentsRoutes(app, db) {
-  const dao = AssignmentsDao(db);
+  const dao = AssignmentsDao();
 
   const findAssignmentsForCourse = async (req, res) => {
     const { courseId } = req.params;
