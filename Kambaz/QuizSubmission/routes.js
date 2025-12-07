@@ -31,8 +31,15 @@ export default function QuizSubmissionRoutes(app) {
     res.send(status);
   };
 
+  const findQuizSubmissionsForQuizForUser = async (req, res) => {
+    const { uid, qid } = req.params;
+    const status = await dao.findQuizSubmissionsForQuizForUser(uid, qid);
+    res.send(status);
+  }
+
   app.post("/api/quiz-submissions/:qid", createQuizSubmission);
   app.get("/api/quiz-submissions/user/:uid", findLatestQuizSubmissionsForUser);
   app.get("/api/quiz-submissions/:qsid", findQuizSubmissionById);
   app.delete("/api/quiz-submissions/:sid", deleteQuizSubmission);
+  app.get("/api/quiz-submissions/user/:uid/quiz/:qid", findQuizSubmissionsForQuizForUser);
 }

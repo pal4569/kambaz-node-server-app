@@ -35,10 +35,15 @@ export default function QuizSubmissionsDao() {
     return await model.findOne({ _id: qsid});
   }
 
+  async function findQuizSubmissionsForQuizForUser(uid, qid) {
+    return await model.countDocuments({ quizId: qid, userId: uid });
+  }
+
  return {
    createQuizSubmission,
    findLatestQuizSubmissionsForUser,
    deleteQuizSubmission,
    findQuizSubmissionById,
+   findQuizSubmissionsForQuizForUser,
  };
 }
